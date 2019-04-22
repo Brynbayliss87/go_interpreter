@@ -1,11 +1,12 @@
 package lexer
 
 import "interpreter/token"
-import "fmt"
 
 func (l *Lexer) NextToken() token.Token {
   var tok token.Token
-  
+ 
+  l.skipWhitespace()
+
   switch l.ch {
   case '=':
     tok = newToken(token.ASSIGN, l.ch)
@@ -27,7 +28,6 @@ func (l *Lexer) NextToken() token.Token {
     tok.Literal = ""
     tok.Type = token.EOF
   default:
-    fmt.Printf("%v", isLetter(l.ch))
     if isLetter(l.ch) {
       tok.Literal = l.readIdentifier()
       tok.Type = token.LookupIdent(tok.Literal);

@@ -3,7 +3,6 @@ package lexer
 import (
   "testing"
   "interpreter/token"
-  "fmt"
 )
 
 func TestNextToken(t *testing.T) {
@@ -62,7 +61,6 @@ let result = add(five, ten);
 
   for i, tt := range tests {
     tok := l.NextToken()
-    fmt.Printf("%v", tok);
     if tok.Type != tt.expectedType {
       t.Fatalf("tests[%d] - tokentype wrong. expected=%q, got=%q",
           i, tt.expectedType, tok.Type)
